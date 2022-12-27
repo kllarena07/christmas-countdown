@@ -1,4 +1,6 @@
 <script lang="ts">
+  import bw_tree from './assets/tree-bw.png'
+
   const calculateDaysFromChristmas = () => {
     let today = new Date()
     let target_year = today.getMonth() + 1 === 12 && today.getDate() > 25 ? today.getFullYear() + 1 : today.getFullYear()
@@ -9,12 +11,15 @@
 
   let day_difference = calculateDaysFromChristmas().difference
   let year = calculateDaysFromChristmas().year
+
+  let tree_height = `${(((365 - day_difference) / 365) * 473) * 0.93}px`
 </script>
 
 <main>
   <section id="app-container">
     <div id="mask-container">
-      <img src="./public/tree-color.png" alt="holiday" />
+      <img src={bw_tree} width="500" height="473" alt="bw tree" />
+      <div id="colored-tree" style="height: {tree_height}"></div>
     </div>
     {#if day_difference ===0}
       <h1>Merry Christmas!</h1>
@@ -23,7 +28,7 @@
       <p>There are only</p>
       <p>{day_difference} days</p>
       <p>till Christmas {year}!</p>
-  {/if}
+    {/if}
   </section>
 </main>
 
@@ -46,7 +51,22 @@
     line-height: clamp(3rem, 2.5vw, 3vw);
   }
 
-  #app-container img {
+  #mask-container {
+    position: relative;
+    width: 500px;
+    height: 473px;
+  }
+
+  #mask-container img {
+    position: relative;
+    top: 0;
     -webkit-user-drag: none;
+  }
+
+  #colored-tree {
+    position: absolute;
+    top: 0;
+    width: 500px;
+    background-image: url('./assets/tree-color.png');
   }
 </style>
