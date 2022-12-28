@@ -1,8 +1,10 @@
 <script lang="ts">
   import bw_tree from './assets/tree-bw.png'
 
+  let month = 12
+
   const calculateDaysFromChristmas = () => {
-    let today = new Date()
+    let today = new Date(`${month}/1/2023`)
     let target_year = today.getMonth() + 1 === 12 && today.getDate() > 25 ? today.getFullYear() + 1 : today.getFullYear()
     let next_christmas = new Date(`12/25/${target_year}`)
     let difference = next_christmas.getTime() - today.getTime()
